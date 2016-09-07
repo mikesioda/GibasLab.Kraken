@@ -4,7 +4,7 @@
 #PBS -l vmem=95GB
 #PBS -l walltime=48:00:00
 start=$(date +%s)
-FILES=/group/gibaslab/working_files/trimmed_reads/time_point_2/metagenome
+FILES=/group/gibaslab/working_files/trimmed_reads/time_point_2/metagenome/*
 OUT=/group/gibaslab/working_files/kraken_reports/tp2
 KDB=/group/gibaslab/krakenDB
 SUF=Set2
@@ -19,7 +19,7 @@ do
 	fileR2=null
 	for f in $FILES 
 	do
-		if [[ $f == *-paired* && $f == *$testSet* ]]; then
+		if [[ $f == *-paired* && $f == *_$testSet* ]]; then
 			if [[ $f == *R1* ]]; then
 				echo $i R1 is $f
 				fileR1=$f
@@ -38,5 +38,5 @@ do
 done
 echo KRAKEN REPORTS AVAILABLE FOR TEST SETS: ${TEST_SETS[@]}
 end=$(date +%s)
-runtime=$(echo "$end - $start" | bc)
+runtime="$(($end - $start))"
 echo SCRIPT COMPLETE: RUNTIME is $runtime seconds
