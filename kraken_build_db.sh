@@ -7,7 +7,9 @@
 start=$(date +%s)
 echo SCRIPT BUILDING KRAKEN DB 
 KDB=/group/gibaslab/krakenDB
+mkdir $KDB
 kraken-build --standard --threads 12 --db $KDB
+chmod -R 775 $KDB
 echo KRAKEN DB BUILD IS COMPLETE
 end=$(date +%s)
 runtime=$"($end - $start)"
