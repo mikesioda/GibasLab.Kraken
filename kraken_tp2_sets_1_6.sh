@@ -11,7 +11,6 @@ SUF=Set2
 TEST_SETS=( {1..6} )
 echo
 echo SCRIPT EXECUTING KRAKEN ON TEST SETS: ${TEST_SETS[@]}
-
 for i in ${TEST_SETS[@]}
 do
 	testSet=$i$SUF
@@ -31,7 +30,7 @@ do
 			fi
 		fi
 	done
-	if [[ $fileR1 != null && $fileR2 != null && SUF == NEVER ]]; then
+	if [[ $fileR1 != null && $fileR2 != null ]]; then
 		kraken --gzip-compressed --fastq-input --DB $KDB --paired $fileR1 $fileR2 > $OUT/$testSet.txt
 		kraken-report --DB $KDB $OUT/$testSet > $OUT/$testSet.report.txt
 	fi
