@@ -5,9 +5,12 @@
 #PBS -l walltime=12:00:00
 # BUILD STANDARD KRAKEN DATABASE
 start=$(date +%s)
+set -o nounset
+set -o errexit
+module load jellyfish
+module load kraken
 echo SCRIPT BUILDING KRAKEN DB 
 KDB=/group/gibaslab/krakenDB
-mkdir $KDB
 kraken-build --db $KDB --download-library plasmids
 kraken-build --db $KDB --download-library human
 kraken-build --standard --threads 12 --db $KDB
